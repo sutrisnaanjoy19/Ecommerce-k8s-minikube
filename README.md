@@ -1,7 +1,3 @@
----
-title: "Project documentation: E-Commerce Micro-service App on K8s"
----
-
 # E-Commerce Micro-service App on K8s
 
 I have setup a E-Commerce app on Kubernetes (Hereby referred to as _K8s_) to demonstrate micro-services architechture and best practices around it.
