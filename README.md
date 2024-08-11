@@ -4,7 +4,36 @@ I have setup a E-Commerce app on Kubernetes (Hereby referred to as _K8s_) to dem
 
 ## Table of Contents
 
-[TOC]
+- [E-Commerce Micro-service App on K8s](#e-commerce-micro-service-app-on-k8s)
+  - [Table of Contents](#table-of-contents)
+  - [Minikube On Linux](#minikube-on-linux)
+    - [Installation](#installation)
+    - [Starting Minikube](#starting-minikube)
+  - [Frontend Setup](#frontend-setup)
+    - [Docker Image](#docker-image)
+      - [Create the Dockerfile to build our frontend image.](#create-the-dockerfile-to-build-our-frontend-image)
+      - [Push the image to a registry](#push-the-image-to-a-registry)
+  - [Backend Setup](#backend-setup)
+    - [Docker Image](#docker-image-1)
+      - [Create the Dockerfile to build our frontend image.](#create-the-dockerfile-to-build-our-frontend-image-1)
+      - [Push the image to a registry](#push-the-image-to-a-registry-1)
+  - [K8s Ingress Setup](#k8s-ingress-setup)
+    - [Setup Nginx](#setup-nginx)
+    - [MongoDB Setup](#mongodb-setup)
+    - [RabbitMQ Setup](#rabbitmq-setup)
+  - [Micro-service Architecture](#micro-service-architecture)
+  - [Setting up Project Secrets](#setting-up-project-secrets)
+    - [Creating the credentials secret](#creating-the-credentials-secret)
+  - [Deploying our app on K8s](#deploying-our-app-on-k8s)
+  - [Gatekeeper](#gatekeeper)
+  - [Monitoring/Logging Setup](#monitoringlogging-setup)
+    - [System Monitoring](#system-monitoring)
+      - [Cluster Metrics](#cluster-metrics)
+      - [Frontend Metrics](#frontend-metrics)
+      - [Backend Metrics](#backend-metrics)
+    - [Logs Monitoring](#logs-monitoring)
+      - [Kibana Demo](#kibana-demo)
+  - [Troubleshooting](#troubleshooting)
 
 ## Minikube On Linux
 
