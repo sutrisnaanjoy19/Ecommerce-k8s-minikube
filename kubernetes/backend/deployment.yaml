@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: node-backend
+        image: anjoysutrisna/e-commerce-depl-backend:v0.2.0
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 500m
+            memory: 400Mi
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGO_HOSTNAME
+          value: mongo-mongodb
+        - name: MONGO_PORT
+          value: "27017"
+        - name: RABBITMQ_HOSTNAME
+          value: rabbitmq
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-queue-cred
+              key: MONGO_USER
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-queue-cred
+              key: MONGO_PASSWORD
+        - name: RABBITMQ_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-queue-cred
+              key: RABBITMQ_USER
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-queue-cred
+              key: RABBITMQ_PASSWORD
+        # - name: MONGO_URI
+        #   value: "mongodb://$(MONGO_USER):$(MONGO_PASSWORD)@mongo-mongodb.default.svc.cluster.local:27017/ecommerce"
+        # - name: RABBITMQ_URI
+        #   value: "amqp://$(RABBITMQ_USER):$(RABBITMQ_PASSWORD)@rabbitmq.default.svc.cluster.local:5672/"

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    resources: # Comment out the limits to test the policy
+      requests:
+        cpu: "100m"
+        memory: "200Mi"
