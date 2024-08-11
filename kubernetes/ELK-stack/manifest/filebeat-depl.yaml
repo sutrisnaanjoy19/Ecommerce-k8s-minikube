@@ -47,11 +47,13 @@ rules:
 - apiGroups: [""] # "" indicates the core API group
   resources:
   - namespaces
+  - deployments
   - pods
   verbs:
   - get
   - watch
   - list
+
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -82,7 +84,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: filebeat
-        image: docker.elastic.co/beats/filebeat:7.8.0
+        image: docker.elastic.co/beats/filebeat:8.15.0
         args: ["-c", "/etc/filebeat.yml", "-e"]
         env:
         - name: LOGSTASH_URL
