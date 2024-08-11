@@ -84,6 +84,8 @@ minikube tunnel
 
 I wrote a simple frontend using react which fetches the product list from the backend and provides users with **"Buy"** button on clicking which it sends a request to the backend to add an order to the message queue (_RabbitMQ_).
 
+![Frontend in browser](./images/frontend_browser.png)
+
 ### Docker Image
 
 #### Create the Dockerfile to build our frontend image.
