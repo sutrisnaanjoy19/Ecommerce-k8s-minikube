@@ -15,7 +15,7 @@ I have setup a E-Commerce app on Kubernetes (Hereby referred to as _K8s_) to dem
       - [Push the image to a registry](#push-the-image-to-a-registry)
   - [Backend Setup](#backend-setup)
     - [Docker Image](#docker-image-1)
-      - [Create the Dockerfile to build our frontend image.](#create-the-dockerfile-to-build-our-frontend-image-1)
+      - [Create the Dockerfile to build our backend image.](#create-the-dockerfile-to-build-our-backend-image)
       - [Push the image to a registry](#push-the-image-to-a-registry-1)
   - [K8s Ingress Setup](#k8s-ingress-setup)
     - [Setup Nginx](#setup-nginx)
@@ -121,7 +121,7 @@ It exposes 3 APIs.
 
 ### Docker Image
 
-#### Create the Dockerfile to build our frontend image.
+#### Create the Dockerfile to build our backend image.
 
 - We simply do a _npm build_ inside dockerfile.
 - And then run _index.js_ file using node package manager as entrypoint executable.

@@ -26,8 +26,8 @@ spec:
         image: docker.elastic.co/logstash/logstash:8.15.0
         resources:
           requests:
-            cpu: 300m
-            memory: 512Mi
+            cpu: 400m
+            memory: 700Mi
           limits:
             cpu: 500m
             memory: 768Mi
