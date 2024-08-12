@@ -34,6 +34,9 @@ spec:
         ports:
         - containerPort: 5044
         - containerPort: 9600
+        env:
+        - name: SERVER_HOST
+          value: "0.0.0.0"
         volumeMounts:
         - name: logstash-config
           mountPath: /usr/share/logstash/pipeline/logstash.conf

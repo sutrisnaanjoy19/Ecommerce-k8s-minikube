@@ -49,6 +49,7 @@ rules:
   - namespaces
   - deployments
   - pods
+  - nodes
   verbs:
   - get
   - watch

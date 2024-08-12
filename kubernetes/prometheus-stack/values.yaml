@@ -340,6 +340,15 @@ alertmanager:
     - name: 'null'
     templates:
     - '/etc/alertmanager/config/*.tmpl'
+    #   receiver: 'null'
+    #   matchers:
+    #     - alertname =~ "InfoInhibitor|Watchdog|KubeControllerManagerDown|KubeProxyDown|KubeSchedulerDown|KubeCPUOvercommit|KubeMemoryOvercommit|KubeAggregatedAPIErrors|KubeHpaMaxedOut"
+    #   continue: true
+    # - receiver: 'null'
+    #   matchers:
+    #     - job =~ "coredns"
+    #   continue: true
+    # - receiver: 'CM-Java-Notifier'
 
   ## Alertmanager configuration directives (as string type, preferred over the config hash map)
   ## stringConfig will be used only, if tplConfig is true
