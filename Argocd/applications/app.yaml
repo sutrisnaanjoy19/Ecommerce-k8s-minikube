@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: simple-frontend-default # A unique name for this application in Argo CD
+  namespace: argocd             # The Argo CD Application resource lives in the 'argocd' namespace
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # Recommended for clean resource deletion
+spec:
+  project: default              # Assign to an Argo CD project (default is fine for now)
+  source:
+    repoURL: https://github.com/sutrisnaanjoy19/Ecommerce-k8s-minikube.git # Replace with your actual Git repository URL
+    targetRevision: HEAD                              # Track the latest changes on the main branch
+    # IMPORTANT: This path points directly to your application's Kustomize folder
+    path: testargo                               # This is the folder containing your kustomization.yaml
+  destination:
+    server: https://kubernetes.default.svc             # The API server URL of your target cluster (in-cluster)
+    namespace: default                                 # Deploy to the 'default' Kubernetes namespace
+  syncPolicy:
+    automated:
+      prune: true                                      # Delete resources no longer in Git
+      selfHeal: true                                   # Reconcile if manual changes are detected
+    syncOptions:
+      # We assume the 'default' namespace already exists, so CreateNamespace is usually not needed here.
+      # If for some reason you wanted to ensure it's created, you could add:
+      # - CreateNamespace=true

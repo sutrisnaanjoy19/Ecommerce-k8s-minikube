@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: react-frontend
-        image: anjoysutrisna/e-commerce-depl-frontend:v1.0.0
+        image: anjoysutrisna/e-commerce-depl-frontend:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 80

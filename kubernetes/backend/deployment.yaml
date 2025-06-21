@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: node-backend
-        image: anjoysutrisna/e-commerce-depl-backend:v0.2.0
+        image: anjoysutrisna/e-commerce-depl-backend:v1
         imagePullPolicy: Always
         resources:
           requests:
@@ -53,6 +53,6 @@ spec:
               name: db-queue-cred
               key: RABBITMQ_PASSWORD
         # - name: MONGO_URI
-        #   value: "mongodb://$(MONGO_USER):$(MONGO_PASSWORD)@mongo-mongodb.default.svc.cluster.local:27017/ecommerce"
+        #   value: "mongodb://$(MONGO_USER):$(MONGO_PASSWORD)@mongo-mongodb.app.svc.cluster.local:27017/ecommerce"
         # - name: RABBITMQ_URI
-        #   value: "amqp://$(RABBITMQ_USER):$(RABBITMQ_PASSWORD)@rabbitmq.default.svc.cluster.local:5672/"
+        #   value: "amqp://$(RABBITMQ_USER):$(RABBITMQ_PASSWORD)@rabbitmq.app.svc.cluster.local:5672/"
