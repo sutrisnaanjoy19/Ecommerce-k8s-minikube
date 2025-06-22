@@ -37,6 +37,14 @@ spec:
       # These two services are crucial for traffic splitting
       stableService: simple-frontend-stable-service # This is what your Ingress will point to
       canaryService: simple-frontend-canary-service # This service will direct traffic to the new version
+      
+      # --- ADDED THIS SECTION ---
+      trafficRouting:
+        nginx:
+          stableIngress: simple-frontend-ingress # <--- Name of your main Ingress resource
+                                                 #      that Argo Rollouts should manage for traffic splitting
+      # --- END OF ADDED SECTION ---
+
       steps:
       - setWeight: 20 # Send 20% of traffic to the 'v2' image
       - pause: { duration: 60s } # Pause for 1 minute for initial observation
