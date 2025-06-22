@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-frontend-stable-service # This is the stable service name
+  namespace: default
+spec:
+  ports:
+    - port: 8081 # Port your Ingress is expecting
+      targetPort: 80 # Port your container is listening on
+      protocol: TCP
+      name: http
+  # The 'selector' here is just an initial placeholder.
+  # Argo Rollouts will manage and update this selector dynamically.
+  selector:
+    app: simple-frontend

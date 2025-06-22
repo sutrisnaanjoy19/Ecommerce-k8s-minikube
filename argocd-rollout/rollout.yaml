@@ -1,0 +1,48 @@
+# argocd/test/rollout.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: simple-frontend-rollout
+  namespace: default # Keep this in 'default' namespace
+spec:
+  replicas: 1 # Start with 1 replica for initial simplicity in canary. Adjust as needed.
+  selector:
+    matchLabels:
+      app: simple-frontend
+  template:
+    metadata:
+      labels:
+        app: simple-frontend
+    spec:
+      containers:
+      - name: frontend-container
+        image: anjoysutrisna/testargo:latest # <-- Current (stable) image version
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+  strategy:
+    canary:
+      # These two services are crucial for traffic splitting
+      stableService: simple-frontend-stable-service # This is what your Ingress will point to
+      canaryService: simple-frontend-canary-service # This service will direct traffic to the new version
+      steps:
+      - setWeight: 20 # Send 20% of traffic to the 'v2' image
+      - pause: { duration: 60s } # Pause for 1 minute for initial observation
+      - setWeight: 50 # Send 50% of traffic to the 'v2' image
+      - pause: {} # Pause indefinitely. Requires manual promotion using 'kubectl argo rollouts promote'
+      - setWeight: 80 # Send 80% of traffic to the 'v2' image
+      - pause: { duration: 60s } # Another pause
+      - setWeight: 100 # Send 100% of traffic to the 'v2' image (full promotion)
+      # No final pause after 100% weight, the rollout completes here

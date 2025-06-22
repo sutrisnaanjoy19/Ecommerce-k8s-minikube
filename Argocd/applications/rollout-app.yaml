@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: simple-frontend-canary # A unique and descriptive name for this Argo CD application
+  namespace: argocd             # Argo CD Application resources always live in the 'argocd' namespace
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # Recommended for clean resource deletion
+
+spec:
+  project: default              # Assign to an Argo CD project (usually 'default' for simple setups)
+  source:
+    repoURL: https://github.com/sutrisnaanjoy19/Ecommerce-k8s-minikube.git # Replace with your actual Git repository URL
+    targetRevision: HEAD                              # Track the latest changes on the default branch (e.g., main or master)
+    # This path points to the directory containing your Rollout, Services, Ingress, and kustomization.yaml
+    path: argocd-rollout                                 # Make sure this path exactly matches your repository structure
+
+  destination:
+    server: https://kubernetes.default.svc             # The API server URL of your target Kubernetes cluster (in-cluster)
+    namespace: default                                 # The Kubernetes namespace where your frontend application's resources (Rollout, Services, Ingress) will be deployed
+
+  syncPolicy:
+    automated:
+      prune: true                                      # Allow Argo CD to delete resources no longer defined in Git
+      selfHeal: true                                   # Allow Argo CD to automatically reconcile differences if live state drifts from Git
+    # For rollouts, you mi
