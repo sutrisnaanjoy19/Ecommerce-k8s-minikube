@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: frontend-container
-        image: anjoysutrisna/testargo:v2 # <-- Current (stable) image version
+        image: anjoysutrisna/testargo:latest # <-- Current (stable) image version
         ports:
         - containerPort: 80
         livenessProbe:
